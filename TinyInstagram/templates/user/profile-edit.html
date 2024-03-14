@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interior Design</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      grid-gap: 20px;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    .sidebar {
+      background-color: #ea5454;
+      padding: 20px;
+      height: 400px;
+      color: white;
+    }
+
+    .sidebar h1 {
+      margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: #f2f1f1;
+    }
+
+    .sidebar a:hover {
+      color: #666;
+    }
+
+    .content h2 {
+      margin-top: 0;
+      color: #ea5454;
+      text-decoration-line: underline;
+      font-size: 18px;
+    }
+    table {
+      width: 1050px;
+      text-align: center;
+      padding: 8px;
+      border-collapse: collapse;
+    }
+
+    td {
+      border-style: groove;
+      text-align: center;
+      background-color: #f2f2f2;
+      padding: 8px;
+    }
+
+    .th_basic {
+      width: 525px;
+      text-align: center;
+      background-color: #7a7575;
+      padding: 8px;
+    }
+    .th_pro {
+      text-align: center;
+      background-color: #ea5454;
+      padding: 8px;
+    }
+
+    .button {
+      width: 115px;
+      height: 40px;
+      background-color: white;
+      border-color: white;
+    }
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: inherit;
+    }
+
+    html {
+      box-sizing: border-box;
+      font-size: 57.5%;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      padding: 6rem;
+      background-color: white;
+      font-family: "Inter", sans-serif;
+    }
+
+    .grid {
+      display: grid;
+      width: 114rem;
+      grid-gap: 6rem;
+      grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+      align-items: start;
+    }
+  </style>
+  <body class="dir=rtl">
+    <div class="container">
+      <div class="sidebar dir=rtl">
+        <h1>{{user.name}} welcome</h1>
+        <ul>
+            <li><a href="" >Home</a></li>
+            <li><a href="/profile/info">Profile</a></li>
+            <li><a href="/profile">Posts</a></li>
+            <li><a href="/profile/password_change">Change password</a></li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <br />
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="th_pro">full_name</th>
+              <th class="th_basic">username</th>
+              <th class="th_basic">password</th>
+              <th class="th_basic">email</th>
+              <th class="th_basic">phone_number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Test Admin</td>
+              <td>Admindjango1234</td>
+              <td>980000</td>
+              <td>admin@gmail.com</td>
+              <td>09121111111</td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+      </div>
+
+    </div>
+  </body>
+</html>
