@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
 <html dir="ltr">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,7 +27,7 @@ body {
 
 .topnav {
   overflow: hidden;
-  background-color: rgb(9, 9, 111);
+  background-color: black;
   position: relative;
 }
 
@@ -52,7 +53,7 @@ body {
 }
 
 .active {
-  background-color:rgb(9, 9, 111);
+  background-color:black;
   color:yellow;
 }
 *,
@@ -163,8 +164,7 @@ body {
 </head>
 <body>
 
-<!-- Simulate a smartphone / tablet look -->
-<div class="mobile-container">
+<div class="md:container md:mx-auto">
     <div class="topnav">
         <a href="#home" class="active">Home</a>
         <div id="myLinks">
@@ -175,9 +175,6 @@ body {
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
         </a>
-    </div>
-    <div style="padding-left:16px">  
-        <p>This example</p>
     </div>
     <div class="main_flex">
         <div class="grid">
