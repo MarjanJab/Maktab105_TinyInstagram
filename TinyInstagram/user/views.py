@@ -20,6 +20,7 @@ class UserRegisterView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
+            form.save()
             cd = form.cleaned_data
             User.objects.create_user(cd['username'],cd['email'],cd['password2'])
             messages.success(request, 'Your were registered successfully!','success')
@@ -66,3 +67,9 @@ class UserLogoutView(LoginRequiredMixin, View):
         logout(request)
         messages.success(request, 'You were logged successfully!','success')
         return redirect('home')
+
+class UserProfileView(LoginRequiredMixin, View):
+    template_name = 'user/profile-edit.html'
+    def get(self,request,user_id):
+        user = User.objects.get(pk=user_id)
+        return render(request, self.template_name,{'user':user})

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+{% include 'base.html' %}
+{% block content %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Interior Design</title>
+    <title>Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   </head>
   <style>
@@ -118,42 +120,42 @@
     }
   </style>
   <body class="dir=rtl">
-    <div class="container">
-      <div class="sidebar dir=rtl">
-        <h1>{{user.name}} welcome</h1>
-        <ul>
-            <li><a href="" >Home</a></li>
-            <li><a href="/profile/info">Profile</a></li>
-            <li><a href="/profile">Posts</a></li>
-            <li><a href="/profile/password_change">Change password</a></li>
-        </ul>
-      </div>
+    <header class="sticky top-10 h-1/2 flex flex-col bg-white/30 mb-1 z-[1000]" >
+      <div class="container">
+        <div class="sidebar dir=rtl">
+          <h1 class = "text-3xl font-bold text-red-600">{{user.username}} welcome</h1>
+          <ul>
+              <li><a href="{%url 'home' %}" >Home</a></li>
+              <li><a href="{%url 'user_profile' request.user.id %}">Profile</a></li>
+              <li><a href="">Posts</a></li>
+              <li><a href="">Change password</a></li>
+          </ul>
+        </div>
 
-      <div class="content">
-        <br />
-        <table class="table">
-          <thead>
-            <tr>
-              <th class="th_pro">full_name</th>
-              <th class="th_basic">username</th>
-              <th class="th_basic">password</th>
-              <th class="th_basic">email</th>
-              <th class="th_basic">phone_number</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Test Admin</td>
-              <td>Admindjango1234</td>
-              <td>980000</td>
-              <td>admin@gmail.com</td>
-              <td>09121111111</td>
-            </tr>
-          </tbody>
-        </table>
-        <br />
+        <div class="content">
+          <br />
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="th_basic">Full name</th>
+                <th class="th_basic">Username</th>
+                <th class="th_basic">Phone number</th>
+                <th class="th_basic">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{user.full_name}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.phone_number}}</td>
+                <td>{{user.email}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+        </div>
       </div>
-
-    </div>
+    </header>
   </body>
 </html>
+{% endblock %}
