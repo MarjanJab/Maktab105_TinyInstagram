@@ -147,6 +147,10 @@
                         <div>
                             <button class="card__btn">Like </button>
                             <button class="card__btn">Dislike </button>
+                             {% if request.user.id == post.user.id %}
+                                <a href="{% url 'post:post_delete' post.id %}" class="card__btn bg-red-500 hover:bg-red-400">Delete </a>
+                                <a href="{% url 'post:post_update' post.id %}" class="card__btn bg-blue-500 hover:bg-blue-400">Update </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

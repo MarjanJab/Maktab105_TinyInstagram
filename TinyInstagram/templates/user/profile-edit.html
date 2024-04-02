@@ -124,8 +124,8 @@
         <div class="sidebar dir=rtl">
           <h1 class = "text-3xl font-bold text-red-600">{{user.username}} welcome</h1>
           <ul>
-              <li><a href="{%url 'home' %}" >Home</a></li>
-              <li><a href="{%url 'user_profile' request.user.id %}">Profile</a></li>
+              <li><a href="{%url 'post:home' %}" >Home</a></li>
+              <li><a href="{%url 'user:user_profile' request.user.id %}">Profile</a></li>
               <li><a href="{{post.get_absolute_url}}">Posts</a></li>
               <li><a href="">Change password</a></li>
           </ul>

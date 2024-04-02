@@ -12,10 +12,10 @@ class Post(models.Model):
     slug = models.SlugField()
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(User, related_name="liked_posts", blank=True)
-    dislikes = models.ManyToManyField(User, related_name="disliked_posts", blank=True)
-    total_likes = models.PositiveIntegerField(default=0)
-    total_dislikes = models.PositiveIntegerField(default=0)
+    # likes = models.ManyToManyField(User, related_name="liked_posts", blank=True)
+    # dislikes = models.ManyToManyField(User, related_name="disliked_posts", blank=True)
+    # total_likes = models.PositiveIntegerField(default=0)
+    # total_dislikes = models.PositiveIntegerField(default=0)
     #tags
 
     def __str__(self):
@@ -26,6 +26,6 @@ class Post(models.Model):
 
 
 
-class Image(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images")
-    image_url = models.ImageField(upload_to="post_images/")
+# class Image(models.Model):
+#     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="images")
+#     image_url = models.ImageField(upload_to="post_images/")

@@ -1,13 +1,14 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.contrib.auth.models import User
 
 
-class User(models.Model):
-    username = models.CharField(max_length=20, unique=True)
-    password = models.CharField(max_length=20)
-    email = models.EmailField()
-    phone_number = models.CharField(max_length=11, null=True)
-    full_name = models.CharField(max_length=50, null=True)
+# class User(models.Model):
+#     username = models.CharField(max_length=20, unique=True)
+#     password = models.CharField(max_length=20)
+#     email = models.EmailField()
+#     phone_number = models.CharField(max_length=11, null=True)
+#     full_name = models.CharField(max_length=50, null=True)
 
 
 class Profile(models.Model):
