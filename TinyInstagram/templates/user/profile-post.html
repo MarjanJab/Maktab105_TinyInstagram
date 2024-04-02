@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% include 'base.html' %}
+{% block side_menu %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -130,30 +131,31 @@
               <li><a href="">Change password</a></li>
           </ul>
         </div>
-        <div class="content">
-          <br />
-          <table class="table">
-            <thead>
-              <tr>
-                <th class="th_basic">Full name</th>
-                <th class="th_basic">Username</th>
-                <th class="th_basic">Phone number</th>
-                <th class="th_basic">Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{user.full_name}}</td>
-                <td>{{user.username}}</td>
-                <td>{{user.phone_number}}</td>
-                <td>{{user.email}}</td>
-              </tr>
-            </tbody>
-          </table>
-          <br />
-        </div>
       </div>
+      <div class="main_flex">
+        <div class="grid">
+            <div class="grid__item">
+                {% for post in posts %}
+                <div class="card">
+                    <img class="card__img_profile" src="{% static "img/13.JPG" %}" alt="profile">
+                    <br>
+                    <p class="p=5"><strong>{{post.user.username}} - {{post.updated_time}}</strong></p>
+                    <img class="card__img" src="{% static "img/10.JPG" %}" alt="Snowy Mountains">
+                    <div class="card__content">
+                        <p class="card__text">{{post.content}}</p>
+                        <a href="{{post.get_absolute_url}}">View details</a>
+                        <div>
+                            <button class="card__btn">Like </button>
+                            <button class="card__btn">Dislike </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
     </header>
   </body>
 </html>
+{% endblock %} 
 

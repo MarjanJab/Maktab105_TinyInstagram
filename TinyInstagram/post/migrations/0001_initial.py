@@ -18,7 +18,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('content', models.TextField()),
+                ('slug' , models.SlugField()),
                 ('created_time', models.DateTimeField(auto_now_add=True)),
+                ('updated_time', models.DateTimeField(auto_now=True)),
                 ('total_likes', models.PositiveIntegerField(default=0)),
                 ('total_dislikes', models.PositiveIntegerField(default=0)),
                 ('dislikes', models.ManyToManyField(blank=True, related_name='disliked_posts', to='user.user')),

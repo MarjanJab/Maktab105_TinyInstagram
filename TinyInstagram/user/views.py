@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from post.models import Post
 
 
 # Create your views here.
@@ -20,7 +21,7 @@ class UserRegisterView(View):
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
-            form.save()
+            # form.save()
             cd = form.cleaned_data
             User.objects.create_user(cd['username'],cd['email'],cd['password2'])
             messages.success(request, 'Your were registered successfully!','success')
@@ -72,4 +73,5 @@ class UserProfileView(LoginRequiredMixin, View):
     template_name = 'user/profile-edit.html'
     def get(self,request,user_id):
         user = User.objects.get(pk=user_id)
-        return render(request, self.template_name,{'user':user})
+        posts = Post.objects.filter(user = user )
+        return render(request, self.template_name,{'user':user, 'posts':posts})
