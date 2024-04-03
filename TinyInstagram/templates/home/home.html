@@ -159,7 +159,25 @@ body {
 }
 .card__btn:hover span, .card__btn:active span {
   margin-left: 1.5rem;
+
 }
+.card__btn__like{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.3s;
+    margin-right: 1rem;
+}
+
+.card__btn__like:hover {
+    filter: brightness(0.8);
+}
+
+.card__img__like {
+    width: 20px;
+    height: 20px;
+}
+
 </style>
 </head>
 <body>
@@ -193,11 +211,21 @@ body {
                     <img class="card__img" src="{% static "img/10.JPG" %}" alt="Snowy Mountains">
                     <div class="card__content">
                         <p class="card__text">{{post.content}}</p>
-                        <a href="{{post.get_absolute_url}}">View details</a>
-                        <p class="card__text">{{post.updated_time}}</p>
                         <div>
-                            <button class="card__btn">Like </button>
-                            <button class="card__btn">Dislike </button>
+                            <button class="card__btn__like">
+                                <img src="{% static "img/like.svg" %}" alt="Like" class="card__img__like">
+                            </button>
+                            <button class="card__btn__like">
+                                <img src="{% static "img/comment.svg" %}" alt="comment" class="card__img__like">
+                            </button>
+                            <button class="card__btn__like">
+                                <img src="{% static "img/dislike.svg" %}" alt="Dislike" class="card__img__like">
+                            </button>
+                        </div>
+                        <br>
+                        <p class="card__text">{{post.updated_time}}</p>
+                        <a href="{{post.get_absolute_url}}">View details</a>
+                        <div>
                             {% if request.user.id == post.user.id %}
                                 <a href="{% url 'post:post_delete' post.id %}" class="card__btn bg-red-500 hover:bg-red-400">Delete </a>
                                 <a href="{% url 'post:post_update' post.id %}" class="card__btn bg-blue-500 hover:bg-blue-400">Update </a>
@@ -217,10 +245,17 @@ body {
                     <p class="card__text">{{post.content}} </p>
                     <a href="{{post.get_absolute_url}}">View details</a>
                     <p class="card__text">{{post.updated_time}} </p>
-                    <div>
-                        <button class="card__btn">Like</button>
-                        <button class="card__btn">Dislike</button>
-                    </div>
+                   <div>
+                        <button class="card__btn__like">
+                            <img src="{% static "img/like.svg" %}" alt="Like" class="card__img__like">
+                        </button>
+                        <button class="card__btn__like">
+                            <img src="{% static "img/comment.svg" %}" alt="comment" class="card__img__like">
+                        </button>
+                        <button class="card__btn__like">
+                            <img src="{% static "img/dislike.svg" %}" alt="Dislike" class="card__img__like">
+                        </button>
+                   </div>
                  </div>
             </div>
         </div>
@@ -234,9 +269,16 @@ body {
                 <p class="card__text">{{post.content}} </p>
                 <a href="{{post.get_absolute_url}}">View details</a>
                 <p class="card__text">{{post.updated_time}}</p>
-                    <div >
-                        <button class="card__btn">Like</button>
-                        <button class="card__btn">Dislike</button>
+                    <div>
+                        <button class="card__btn__like">
+                            <img src="{% static "img/like.svg" %}" alt="Like" class="card__img__like">
+                        </button>
+                        <button class="card__btn__like">
+                            <img src="{% static "img/comment.svg" %}" alt="comment" class="card__img__like">
+                        </button>
+                        <button class="card__btn__like">
+                            <img src="{% static "img/dislike.svg" %}" alt="Dislike" class="card__img__like">
+                        </button>
                     </div>
             </div>
         </div>
