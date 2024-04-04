@@ -138,3 +138,13 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'user.authenticate.EmailVerification',
 ]
+
+# Google account
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ma.jabariani@gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_PASSWORD = 'qpzxbmrwkuprrdgm'
+EMAIL_USE_TLS = True
+DEFALUT_FROM_EMAIL = 'TinyInstagram'

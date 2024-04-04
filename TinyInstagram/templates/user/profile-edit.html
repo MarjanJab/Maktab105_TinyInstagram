@@ -127,7 +127,7 @@
               <li><a href="{%url 'post:home' %}" >Home</a></li>
               <li><a href="{%url 'user:user_profile' request.user.id %}">Profile</a></li>
               <li><a href="{{post.get_absolute_url}}">Posts</a></li>
-              <li><a href="">Change password</a></li>
+              <li><a href="{%url 'user:reset_password' %}">Change password</a></li>
           </ul>
         </div>
         <div class="content">
