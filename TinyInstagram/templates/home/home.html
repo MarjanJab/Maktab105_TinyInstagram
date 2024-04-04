@@ -16,14 +16,6 @@ body {
 	align-items: center;
 	align-content: space-between;
 }
-.mobile-container {
-  max-width: 100%;
-  margin: auto;
-  background-color:white;
-  height: 500px;
-  color: white;
-  border-radius: 10px;
-}
 
 .topnav {
   overflow: hidden;
@@ -124,12 +116,6 @@ body {
 .card__content {
   padding: 3rem 3rem;
 }
-.card__header {
-  font-size: 3rem;
-  font-weight: 500;
-  color: #0d0d0d;
-  margin-bottom: 1.5rem;
-}
 .card__text {
   font-size: 1.5rem;
   letter-spacing: 0.1rem;
@@ -187,6 +173,7 @@ body {
         <div id="myLinks">
             {% if user.is_authenticated %}
                 <a href="{%url 'user:user_profile' user.id %}">Profile</a>
+                <a href="{%url 'user:user_logout' %}" >Log out</a>
                 {% if request.user.id  == user.id %}
                     <a href="{%url 'post:post_create' %}"> Create Post</a>
                 {% endif %}
@@ -194,6 +181,7 @@ body {
             {% else %}
                 <a href="{%url 'user:user_login' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Login</a>
                 <a href="{%url 'user:user_register' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Register</a>
+                <a href="{%url 'user:reset_password' %}"class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Forget password</a>
             {% endif %}
         </div>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -225,12 +213,6 @@ body {
                         <br>
                         <p class="card__text">{{post.updated_time}}</p>
                         <a href="{{post.get_absolute_url}}">View details</a>
-                        <div>
-                            {% if request.user.id == post.user.id %}
-                                <a href="{% url 'post:post_delete' post.id %}" class="card__btn bg-red-500 hover:bg-red-400">Delete </a>
-                                <a href="{% url 'post:post_update' post.id %}" class="card__btn bg-blue-500 hover:bg-blue-400">Update </a>
-                            {% endif %}
-                        </div>
                     </div>
                 </div>
             </div>
@@ -243,7 +225,6 @@ body {
                 <img class="card__img" src="{% static "img/11.JPG" %}" alt="Snowy Mountains">
                 <div class="card__content">
                     <p class="card__text">{{post.content}} </p>
-                    <a href="{{post.get_absolute_url}}">View details</a>
                     <p class="card__text">{{post.updated_time}} </p>
                    <div>
                         <button class="card__btn__like">
@@ -256,6 +237,9 @@ body {
                             <img src="{% static "img/dislike.svg" %}" alt="Dislike" class="card__img__like">
                         </button>
                    </div>
+                    <br>
+                    <p class="card__text">{{post.updated_time}}</p>
+                   <a href="{{post.get_absolute_url}}">View details</a>
                  </div>
             </div>
         </div>
@@ -267,7 +251,6 @@ body {
             <img class="card__img" src="{% static "img/12.JPG" %}" alt="Snowy Mountains">
             <div class="card__content">
                 <p class="card__text">{{post.content}} </p>
-                <a href="{{post.get_absolute_url}}">View details</a>
                 <p class="card__text">{{post.updated_time}}</p>
                     <div>
                         <button class="card__btn__like">
@@ -280,6 +263,9 @@ body {
                             <img src="{% static "img/dislike.svg" %}" alt="Dislike" class="card__img__like">
                         </button>
                     </div>
+                <br>
+                <p class="card__text">{{post.updated_time}}</p>
+                 <a href="{{post.get_absolute_url}}">View details</a>
             </div>
         </div>
     </div>

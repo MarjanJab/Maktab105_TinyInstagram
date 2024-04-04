@@ -18,6 +18,9 @@ class Post(models.Model):
     # total_dislikes = models.PositiveIntegerField(default=0)
     #tags
 
+    class Meta:
+        ordering =['-created_time']
+
     def __str__(self):
         return f'{self.slug} - {self.created_time}'
 

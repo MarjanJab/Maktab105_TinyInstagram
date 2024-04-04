@@ -17,14 +17,6 @@ body {
 	align-items: center;
 	align-content: space-between;
 }
-.mobile-container {
-  max-width: 100%;
-  margin: auto;
-  background-color:white;
-  height: 500px;
-  color: white;
-  border-radius: 10px;
-}
 
 .topnav {
   overflow: hidden;
@@ -125,12 +117,6 @@ body {
 .card__content {
   padding: 3rem 3rem;
 }
-.card__header {
-  font-size: 3rem;
-  font-weight: 500;
-  color: #0d0d0d;
-  margin-bottom: 1.5rem;
-}
 .card__text {
   font-size: 1.5rem;
   letter-spacing: 0.1rem;
@@ -160,21 +146,38 @@ body {
 }
 .card__btn:hover span, .card__btn:active span {
   margin-left: 1.5rem;
+
+}
+.card__btn__like{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.3s;
+    margin-right: 1rem;
+}
+
+.card__btn__like:hover {
+    filter: brightness(0.8);
+}
+
+.card__img__like {
+    width: 20px;
+    height: 20px;
 }
 </style>
 </head>
 <body>
 <div class="md:container md:mx-auto">
     <div class="topnav">
-        <a href="{%url 'home' %}" class="active">Home</a>
+        <a href="{%url 'post:home' %}" class="active">Home</a>
         <div id="myLinks">
             {% if user.is_authenticated %}
-                <a href="{%url 'user_profile' user.id %}">Profile</a>
+                <a href="{%url 'user:user_profile' user.id %}">Profile</a>
                 <a href="#contact">Posts</a>
                 <a href="#about">Comment</a>
             {% else %}
-                <a href="{%url 'user_login' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Login</a>
-                <a href="{%url 'user_register' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Register</a>
+                <a href="{%url 'user:user_login' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Login</a>
+                <a href="{%url 'user:user_register' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Register</a>
             {% endif %}
         </div>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -185,18 +188,29 @@ body {
         <div class="grid">
             <div class="grid__item">
                 {% for post in posts %}
+            <div class="grid__item">
                 <div class="card">
                     <img class="card__img_profile" src="{% static "img/13.JPG" %}" alt="profile">
                     <br>
-                    <p class="p=5"><strong>{{post.user.username}} - {{post.updated_time}}</strong></p>
-                    <a href="{% url 'user:user_profile' post.user.id %}">{{post.user.username}}}</a>
+                    <p class="p=5"><strong>{{post.user.username}}</strong></p>
                     <img class="card__img" src="{% static "img/10.JPG" %}" alt="Snowy Mountains">
                     <div class="card__content">
                         <p class="card__text">{{post.content}}</p>
+                        <div>
+                            <button class="card__btn__like">
+                                <img src="{% static "img/like.svg" %}" alt="Like" class="card__img__like">
+                            </button>
+                            <button class="card__btn__like">
+                                <img src="{% static "img/comment.svg" %}" alt="comment" class="card__img__like">
+                            </button>
+                            <button class="card__btn__like">
+                                <img src="{% static "img/dislike.svg" %}" alt="Dislike" class="card__img__like">
+                            </button>
+                        </div>
+                        <br>
+                        <p class="card__text">{{post.updated_time}}</p>
                         <a href="{{post.get_absolute_url}}">View details</a>
                         <div>
-                            <button class="card__btn">Like </button>
-                            <button class="card__btn">Dislike </button>
                             {% if request.user.id == post.user.id %}
                                 <a href="{% url 'post:post_delete' post.id %}" class="card__btn bg-red-500 hover:bg-red-400">Delete </a>
                                 <a href="{% url 'post:post_update' post.id %}" class="card__btn bg-blue-500 hover:bg-blue-400">Update </a>
@@ -204,7 +218,8 @@ body {
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+            </div>
+            {% endfor %}
             </div>
         </div>
     </div>

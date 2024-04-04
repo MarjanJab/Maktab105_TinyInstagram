@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 {% include 'base.html' %}
 <html lang="en">
   <head>
@@ -117,6 +118,173 @@
       grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
       align-items: start;
     }
+    body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.main_flex{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: space-between;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: black;
+  position: relative;
+}
+
+.topnav #myLinks {
+  display: none;
+}
+
+.topnav a {
+ float: inline-start;
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a.icon {
+  float: right;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.active {
+  background-color:black;
+  color:yellow;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 6rem;
+  background-color: #f5f5f5;
+  font-family: "Inter", sans-serif;
+}
+@media (max-width: 60em) {
+  body {
+    padding: 3rem;
+  }
+}
+
+.grid {
+  display: grid;
+  width: 114rem;
+  grid-gap: 6rem;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  align-items: start;
+}
+@media (max-width: 60em) {
+  .grid {
+    grid-gap: 3rem;
+  }
+}
+.grid__item {
+  background-color: #fff;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.grid__item:hover {
+  transform: translateY(-0.5%);
+  box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.2);
+}
+
+.card__img {
+  display: block;
+  width: 100%;
+  height: 18rem;
+  object-fit: cover;
+}
+.card__img_profile {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    float:inline-start;
+    object-fit: cover;
+  }
+.card__content {
+  padding: 3rem 3rem;
+}
+.card__text {
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+  line-height: 1.7;
+  color: #3d3d3d;
+  margin-bottom: 2.5rem;
+}
+.card__btn {
+  display: block;
+  width: 75px;
+  padding: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+  color: gray;
+  background-color: white;
+  border: none;
+  border-radius: 0.4rem;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.card__btn span {
+  margin-left: 1rem;
+  transition: 0.2s;
+}
+.card__btn:hover, .card__btn:active {
+  background-color: #dce4ff;
+}
+.card__btn:hover span, .card__btn:active span {
+  margin-left: 1.5rem;
+
+}
+.card__btn__like{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.3s;
+    margin-right: 1rem;
+}
+.card__btn__post{
+    border: none;
+    cursor: pointer;
+    transition: filter 0.3s;
+    margin-right: 1rem;
+    width: 20px;
+    height: 20px;
+}
+.card__btn__like:hover {
+    filter: brightness(0.8);
+    transition: filter 0.3s;
+    margin-right: 1rem;
+
+}
+.card__img__like {
+    width: 20px;
+    height: 20px;
+}
   </style>
   <body class="dir=rtl">
     <header class="sticky top-10 h-1/2 flex flex-col bg-white/30 mb-1 z-[1000]" >
@@ -125,31 +293,52 @@
           <h1 class = "text-3xl font-bold text-red-600">{{user.username}} welcome</h1>
           <ul>
               <li><a href="{%url 'post:home' %}" >Home</a></li>
-              <li><a href="{%url 'user:user_profile' request.user.id %}">Profile</a></li>
-              <li><a href="{{post.get_absolute_url}}">Posts</a></li>
-              <li><a href="{%url 'user:reset_password' %}">Change password</a></li>
+              {% if request.user.id == user.id %}
+                <li><a href="{%url 'user:user_profile' request.user.id %}">Profile</a></li>
+                <li><a href="{{post.get_absolute_url}}">View all your posts</a></li>
+                <li><a href="{% url 'post:post_create' %}" >Create posts</a></li>
+                <li><a href="{%url 'user:reset_password' %}">Change password</a></li>
+              {% endif %}
+              {% if request.user.id != user.id and not is_following %}
+                <a class="btn btn-primary" href="{% url 'user:user_follow' user.id %}">Follow</a>
+              {% elif request.user.id != user.id and is_following %}
+                <a class="btn btn-primary" href="{% url 'user:user_unfollow' user.id %}">Unfollow</a>
+              {% endif %}
           </ul>
         </div>
         <div class="content">
-          <br />
-          <table class="table">
-            <thead>
-              <tr>
-                <th class="th_basic">Full name</th>
-                <th class="th_basic">Username</th>
-                <th class="th_basic">Phone number</th>
-                <th class="th_basic">Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{user.full_name}}</td>
-                <td>{{user.username}}</td>
-                <td>{{user.phone_number}}</td>
-                <td>{{user.email}}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="main_flex">
+            <div class="grid">
+                {% for post in posts %}
+                <div class="grid__item">
+                    <div class="card">
+                        <img class="card__img_profile" src="{% static "img/13.JPG" %}" alt="profile">
+                        <p class="p=5"><strong>{{post.user.username}}</strong></p>
+                        <img class="card__img" src="{% static "img/10.JPG" %}" alt="Snowy Mountains">
+                        <div class="card__content">
+                            <p class="card__text">{{post.content}}</p>
+                            <div>
+                                <button class="card__btn__like">
+                                    <img src="{% static "img/like.svg" %}" alt="Like" class="card__img__like">
+                                </button>
+                                <button class="card__btn__like">
+                                    <img src="{% static "img/comment.svg" %}" alt="comment" class="card__img__like">
+                                </button>
+                                <button class="card__btn__like">
+                                    <img src="{% static "img/dislike.svg" %}" alt="Dislike" class="card__img__like">
+                                </button>
+                            </div>
+                            <br>
+                            <p class="card__text">{{post.updated_time}}</p>
+                            {% if request.user.id == post.user.id %}
+                                <a href="{% url 'post:post_delete' post.id %}" class="card__btn__post bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Delete </a>
+                                <a href="{% url 'post:post_update' post.id %}" class="card__btn__post bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Update </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
           <br />
         </div>
       </div>
